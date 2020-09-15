@@ -44,11 +44,11 @@ docker run --rm --gpus all -v $(pwd):/base-dir damienir/hkd-electra:v2-finetuned
 
 4. docker를 이용한 학습이 싫으시다면, 직접 ```classification.py``` 를 실행하여 fine-tuning / benchmark를 실행할 수 있습니다.
 
-    Windows 10, Mac의 환경이라 GPU 문제로 인해 docker 설정이 어려운 경우,
-    
-    [simpletransformers의 setup](https://github.com/ThilinaRajapakse/simpletransformers#setup) 을 참고하여 GPU 환경을 구축 후 실행해 주세요.
-    
-    wandb를 사용하고자 하는 분은 config.json 파일에 ```"wandb_project": "wandb 프로젝트 이름"``` 을 넣으시면 잘 작동합니다.
+5. Windows 10의 환경이라 GPU 문제로 인해 docker 설정이 어려운 경우,
+
+    nvidia의 [cuda toolkit documentation](https://docs.nvidia.com/cuda/wsl-user-guide/index.html), simpletransformers의 [setup](https://github.com/ThilinaRajapakse/simpletransformers#setup) 을 참고하여 GPU 환경을 구축 후 실행해 주세요.
+
+6. wandb를 사용하고자 하는 분은 config.json 파일에 ```"wandb_project": "wandb 프로젝트 이름"``` 을 넣으시면 잘 작동합니다.
     
 정상적으로 실행되었다면 다음과 같이 모델이 학습되는 모습을 볼 수 있습니다.
 ![docker works well](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/docker_works_well.png)
