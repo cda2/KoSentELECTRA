@@ -102,10 +102,21 @@ limit_alphabet을 **1만 이상**으로 설정하여 생성하였습니다
 }
 ```
 
+## About Finetuning
+[simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers) 를 이용한 파인 튜닝 코드를 작성하였으며,
+
+내용은 이 리포지토리에 첨부 되어있는 classification.py 파일과 별반 차이 없으며, 경우에 따라 학습률이나 세부 파라미터를 조정하는 정도입니다.
+
+최종 업로드 모델은 크게 파라미터를 손 볼 필요가 없는 5e-5의 lr을 설정한 모델을 업로드 하였습니다.
+
+기존 파인튜닝 코드들의 경우 성능을 비교하거나, 한 눈에 보기 위해서는 다소 시간을 소요해야 했으나,
+
+simpletransformers와 그에 내장되어 있는 [wandb](https://app.wandb.ai) 를 사용하여 빠르고, 한 눈에 성능을 비교할 수 있습니다. 
+
 ## Benchmark Result
 배치 사이즈, 학습률 등의 설정을 조정하여 NSMC 태스크에서 최고 정확도를 91.49%까지 달성하였습니다.
 
-S3에 업로드 되어 있는 모델의 성능은 91.35% 이므로 해당 모델 사용에 오해 없으시길 바랍니다.
+S3에 업로드 되어 있는 모델의 성능은 91.35%, lr은 5e-5 이므로 해당 모델 사용에 오해 없으시길 바랍니다.
 
 해당 성능 측정은 [Simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers)를 사용하여 측정하였습니다.
 
@@ -120,3 +131,4 @@ TensorFlow Research Cloud(TFRC) 의 지원을 받아 Cloud TPU로 모델을 학�
 - [KcBERT](https://github.com/Beomi/KcBERT)
 - [simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers)
 - [kor_pretrain_LM](https://github.com/enlipleai/kor_pretrain_LM)
+- [wandb](https://app.wandb.ai)
