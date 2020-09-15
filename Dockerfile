@@ -26,3 +26,5 @@ COPY . /electra/
 ADD ./classification.py /electra/
 RUN mkdir /base-dir
 ADD ./config.json /base-dir/
+
+CMD ["python3", "classification.py"]
