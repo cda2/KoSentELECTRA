@@ -49,6 +49,9 @@ docker run --rm --gpus all -v $(pwd):/base-dir damienir/hkd-electra:v2-finetuned
     [simpletransformers의 setup](https://github.com/ThilinaRajapakse/simpletransformers#setup) 을 참고하여 GPU 환경을 구축 후 실행해 주세요.
     
     wandb를 사용하고자 하는 분은 config.json 파일에 ```"wandb_project": "wandb 프로젝트 이름"``` 을 넣으시면 잘 작동합니다.
+    
+정상적으로 실행되었다면 다음과 같이 모델이 학습되는 모습을 볼 수 있습니다.
+![docker works well](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/docker_works_well.png)
 
 ## About Model's Corpus
 개인으로서 수집할 수 있는 대용량 말뭉치는 다 사용하였으며, 각 모델마다 차이가 있습니다.
