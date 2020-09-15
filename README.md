@@ -54,7 +54,7 @@ docker run --rm --gpus all -v $(pwd):/base-dir damienir/hkd-electra:v2-finetuned
 도커가 정상적으로 실행되었다면 다음과 같이 모델이 학습되는 모습을 볼 수 있습니다.
 ![docker works well](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/docker_works_well.png)
     
-+) 다음의 명령어를 사용하여 간단한 감성 분석 서버를 만들 수 있습니다.
++) 다음의 명령어를 사용하여 간단한 감성 분석 서버를 만들 수 있습니다. localhost:8000으로 접속해보세요.
 
 ```
 docker run --rm --gpus all -p 8000:8000 --name nsmc-web damienir/hkd-electra:
