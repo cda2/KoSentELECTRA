@@ -36,11 +36,11 @@ cp ../ratings_* .
 
 3. docker의 --gpus all 명령어를 사용할 수 있다면, 다음 명령어를 실행해서 바로 이진 클래스 분류를 실행할 수 있습니다.
 
+    --rm 옵션을 사용 시 컨테이너가 종료될 때 자동으로 삭제됩니다.
+
 ```
 docker run --rm --gpus all -v $(pwd):/base-dir damienir/hkd-electra:v2-finetuned-benchmark
 ```
-
---rm 옵션을 사용 시 컨테이너가 종료될 때 자동으로 삭제됩니다.
 
 4. docker를 이용한 학습이 싫으시다면, 직접 ```classification.py``` 를 실행하여 fine-tuning / benchmark를 실행할 수 있습니다.
 
@@ -49,6 +49,13 @@ docker run --rm --gpus all -v $(pwd):/base-dir damienir/hkd-electra:v2-finetuned
     nvidia의 [cuda toolkit documentation](https://docs.nvidia.com/cuda/wsl-user-guide/index.html), simpletransformers의 [setup](https://github.com/ThilinaRajapakse/simpletransformers#setup) 을 참고하여 GPU 환경을 구축 후 실행해 주세요.
 
 6. wandb를 사용하고자 하는 분은 config.json 파일에 ```"wandb_project": "wandb 프로젝트 이름"``` 을 넣으시면 잘 작동합니다.
+
++) 다음의 명령어를 사용하여 간단한 감성 분석 서버를 만들 수 있습니다.
+
+```
+docker run --rm --gpus all -p 8000:8000 --name nsmc-web damienir/hkd-electra:
+```
+    
     
 정상적으로 실행되었다면 다음과 같이 모델이 학습되는 모습을 볼 수 있습니다.
 ![docker works well](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/docker_works_well.png)
