@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  benchmark:
+    build: .
+    volumes:
+      - ./:/electra
+    command: python3 classification.py
