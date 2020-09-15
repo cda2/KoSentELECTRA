@@ -105,6 +105,8 @@ limit_alphabet을 1만 이상으로 설정하여 생성하였습니다
 
 S3에 업로드 되어 있는 모델의 성능은 91.35% 이므로 해당 모델 사용에 오해 없으시길 바랍니다.
 
+![Benchmark Result](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/benchmark_result.png)
+
 
 ## Acknowledgement
 TensorFlow Research Cloud(TFRC) 의 지원을 받아 Cloud TPU로 모델을 학습하였습니다.<br>
