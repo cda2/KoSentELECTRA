@@ -126,8 +126,6 @@ limit_alphabet을 **1만 이상**으로 설정하여 생성하였습니다
 
 simpletransformers와 그에 내장되어 있는 [wandb](https://app.wandb.ai) 를 사용하여 빠르고, 한 눈에 성능을 비교할 수 있습니다.
 
-wandb
-
 ## Benchmark Result
 배치 사이즈, 학습률 등의 설정을 조정하여 NSMC 태스크에서 최고 정확도를 91.49%까지 달성하였습니다.
 
