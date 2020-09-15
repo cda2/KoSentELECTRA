@@ -4,5 +4,5 @@ services:
   benchmark:
     build: .
     volumes:
-      - ./:/electra
+      - ./:/base-dir/
     command: python3 classification.py

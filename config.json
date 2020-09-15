@@ -23,6 +23,5 @@
   "train_batch_size": 64,
   "train_data": "/base-dir/ratings_train.txt",
   "use_cached_eval_features": true,
-  "use_multiprocessing": true,
-  "wandb_project": "your-project"
+  "use_multiprocessing": true
 }
