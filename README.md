@@ -50,15 +50,17 @@ docker run --rm --gpus all -v $(pwd):/base-dir damienir/hkd-electra:v2-finetuned
 
 6. wandb를 사용하고자 하는 분은 config.json 파일에 ```"wandb_project": "wandb 프로젝트 이름"``` 을 넣으시면 잘 작동합니다.
 
+
+도커가 정상적으로 실행되었다면 다음과 같이 모델이 학습되는 모습을 볼 수 있습니다.
+![docker works well](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/docker_works_well.png)
+    
 +) 다음의 명령어를 사용하여 간단한 감성 분석 서버를 만들 수 있습니다.
 
 ```
 docker run --rm --gpus all -p 8000:8000 --name nsmc-web damienir/hkd-electra:
 ```
-    
-    
-정상적으로 실행되었다면 다음과 같이 모델이 학습되는 모습을 볼 수 있습니다.
-![docker works well](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/docker_works_well.png)
+
+![nsmc_web_image](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/nsmc_web.gif)
 
 ## About Model's Corpus
 개인으로서 수집할 수 있는 대용량 말뭉치는 다 사용하였으며, 각 모델마다 차이가 있습니다.
