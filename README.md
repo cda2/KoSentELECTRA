@@ -3,9 +3,9 @@
 
 현재 1개의 모델을 프리트레인을 마쳤으며, 나머지 4개의 모델을 프리트레인 하고 있습니다.
 
-각 모델마다 다른 설정과 말뭉치를 사용하였으며,
+각 모델마다 다른 설정과 말뭉치를 사용하였으며, 단순히 감성 분석에 특화된 모델이 아닌, 다량의 말뭉치를 사용하여 구어체와 문어체 및 신조어, 오탈자까지도 처리할 수 있는 만능 모델을 만들고자 하고 있습니다.
 
-small 모델의 경우 base 모델의 학습이 모두 끝난 후 생성하고자 합니다.
+이 모델은 [2020 국어 정보 처리 시스템 경진 대회](http://hkd.or.kr/) 출품작입니다.
 
 ## How to use
 ```python
@@ -63,7 +63,7 @@ docker-compose -f docker-compose.yml up -d
 
 모든 vocab는 tokeniers의 BertWordPieceTokenizer를 사용하여 만들었으며,
 
-limit_alphabet을 1만 이상으로 설정하여 생성하였습니다
+limit_alphabet을 **1만 이상**으로 설정하여 생성하였습니다
 
 * Model 1
     * Vocab size 32000, KcBERT + 음식점 리뷰 + NSMC + 위키피디아 + KCC 사용
@@ -104,6 +104,8 @@ limit_alphabet을 1만 이상으로 설정하여 생성하였습니다
 배치 사이즈, 학습률 등의 설정을 조정하여 NSMC 태스크에서 최고 정확도를 91.49%까지 달성하였습니다.
 
 S3에 업로드 되어 있는 모델의 성능은 91.35% 이므로 해당 모델 사용에 오해 없으시길 바랍니다.
+
+해당 성능 측정은 [Simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers)를 사용하여 측정하였습니다.
 
 ![Benchmark Result](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/benchmark_result.png)
 
