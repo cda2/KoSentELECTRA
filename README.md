@@ -3,11 +3,14 @@
 
 현재 1개의 모델을 프리트레인을 마쳤으며, 나머지 4개의 모델을 프리트레인 하고 있습니다.
 
-각 모델마다 다른 설정과 말뭉치를 사용하였으며, 단순히 감성 분석에 특화된 모델이 아닌, 다량의 말뭉치를 사용하여 구어체와 문어체 및 신조어, 오탈자까지도 처리할 수 있는 만능 모델을 만들고자 하고 있습니다.
+각 모델마다 다른 설정과 말뭉치를 사용하였으며, 단순히 감성 분석에 특화된 모델이 아닌,
+
+다량의 말뭉치를 사용하여 구어체와 문어체 및 신조어, 오탈자까지도 처리할 수 있는 만능 모델을 만들고자 하고 있습니다.
 
 이 모델은 [2020 국어 정보 처리 시스템 경진 대회](http://hkd.or.kr/) 출품작입니다.
 
 ## How to use
+
 ```python
 from transformers import ElectraTokenizer, ElectraModel
 
@@ -22,32 +25,30 @@ git clone htts://github.com/damien-ir/KoSentELECTRA
 cd KoSentELECTRA
 ```
 
-2. 학습용 데이터와 검증용 데이터를 clone한 KoSentELECTRA에 넣어줍니다.
+2. 학습용 데이터와 검증용 데이터를 clone한 KoSentELECTRA 폴더에 넣어줍니다.
 
-기본 설정 상으로 파일의 이름은 NSMC의 파일 이름과 같은 ratings_train.txt, ratings_test.txt이며,
-
-다른 파일 이름을 사용하시려면 config.json 파일을 수정해주세요.  
+    기본 설정 상으로 파일의 이름은 NSMC의 파일 이름과 같은 ratings_train.txt, ratings_test.txt이며,
+    
+    다른 파일 이름을 사용하시려면 config.json 파일을 수정해주세요.  
 ```
 cp ../ratings_* .
 ```
 
-3. 그 후 docker-comppose 를 실행하여 도커를 컨테이너화 합니다.
+3. docker의 --gpus all 명령어를 사용할 수 있다면, 다음 명령어를 실행해서 바로 이진 클래스 분류를 실행할 수 있습니다.
 
-docker-compose.yml에서 미리 설정을 해두었기 때문에,
-성공적으로 컨테이너화 할 경우 자동으로 모델의 학습이 시작됩니다.
 ```
-docker-compose -f docker-compose.yml up
+docker run --rm --gpus all -v $(pwd):/base-dir damienir/hkd-electra:v2-finetuned-benchmark
 ```
 
-4. 이후 셸 창에서 모델의 학습 과정을 지켜볼 수 있습니다.
+--rm 옵션을 사용 시 컨테이너가 종료될 때 자동으로 삭제됩니다.
 
-학습 과정이 궁금하지 않으시다면, 명령어 맨 뒤에 -d를 붙여 백그라운드로 실행해주세요.
-```
-docker-compose -f docker-compose.yml up -d
-```
+4. docker를 이용한 학습이 싫으시다면, 직접 ```classification.py``` 를 실행하여 fine-tuning / benchmark를 실행할 수 있습니다.
 
-5. docker를 이용한 학습이 싫으시다면, 직접 ```classification.py``` 를 실행하여 fine-tuning / benchmark를 실행할 수 있습니다.
-Windows 10, Mac의 환경이라 GPU 문제로 인해 docker 설정이 어려운 경우, [simpletransformers의 setup](https://github.com/ThilinaRajapakse/simpletransformers#setup) 을 참고하여 GPU 환경을 구축 후 실행해 주세요.
+    Windows 10, Mac의 환경이라 GPU 문제로 인해 docker 설정이 어려운 경우,
+    
+    [simpletransformers의 setup](https://github.com/ThilinaRajapakse/simpletransformers#setup) 을 참고하여 GPU 환경을 구축 후 실행해 주세요.
+    
+    wandb를 사용하고자 하는 분은 config.json 파일에 ```"wandb_project": "wandb 프로젝트 이름"``` 을 넣으시면 잘 작동합니다.
 
 ## About Model's Corpus
 개인으로서 수집할 수 있는 대용량 말뭉치는 다 사용하였으며, 각 모델마다 차이가 있습니다.
@@ -111,7 +112,9 @@ limit_alphabet을 **1만 이상**으로 설정하여 생성하였습니다
 
 기존 파인튜닝 코드들의 경우 성능을 비교하거나, 한 눈에 보기 위해서는 다소 시간을 소요해야 했으나,
 
-simpletransformers와 그에 내장되어 있는 [wandb](https://app.wandb.ai) 를 사용하여 빠르고, 한 눈에 성능을 비교할 수 있습니다. 
+simpletransformers와 그에 내장되어 있는 [wandb](https://app.wandb.ai) 를 사용하여 빠르고, 한 눈에 성능을 비교할 수 있습니다.
+
+wandb
 
 ## Benchmark Result
 배치 사이즈, 학습률 등의 설정을 조정하여 NSMC 태스크에서 최고 정확도를 91.49%까지 달성하였습니다.
