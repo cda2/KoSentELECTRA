@@ -42,13 +42,15 @@ cp ../ratings_* .
 docker run --rm --gpus all -v $(pwd):/base-dir damienir/hkd-electra:v2-finetuned-benchmark
 ```
 
-4. docker를 이용한 학습이 싫으시다면, 직접 ```classification.py``` 를 실행하여 fine-tuning / benchmark를 실행할 수 있습니다.
+* docker를 이용한 학습이 싫으시다면, 직접 ```classification.py``` 를 실행하여 fine-tuning / benchmark를 실행할 수 있습니다.
 
-5. Windows 10의 환경이라 GPU 문제로 인해 docker 설정이 어려운 경우,
+* Windows 10의 환경이라 GPU 문제로 인해 docker 설정이 어려운 경우,
 
     nvidia의 [cuda toolkit documentation](https://docs.nvidia.com/cuda/wsl-user-guide/index.html), simpletransformers의 [setup](https://github.com/ThilinaRajapakse/simpletransformers#setup) 을 참고하여 GPU 환경을 구축 후 실행해 주세요.
 
-6. wandb를 사용하고자 하는 분은 config.json 파일에 ```"wandb_project": "wandb 프로젝트 이름"``` 을 넣으시면 잘 작동합니다.
+* wandb를 사용하고자 하는 분은 config.json 파일에 ```"wandb_project": "wandb 프로젝트 이름"``` 을 넣으시면 잘 작동합니다.
+
+* config 설정은 simpletransformers의 [Args Explained](https://github.com/ThilinaRajapakse/simpletransformers#args-explained) 를 참고해주세요.
 
 
 도커가 정상적으로 실행되었다면 다음과 같이 모델이 학습되는 모습을 볼 수 있습니다.
@@ -73,12 +75,12 @@ docker run --rm --gpus all -p 8000:8000 --name nsmc-web damienir/hkd-electra:nsm
 * [국어국립원 모두의 말뭉치](https://corpus.korean.go.kr/) 구어 / 문어 / 신문 / 메신저 / 웹 말뭉치
 * 직접 크롤링한 음식점 리뷰 (주로 구어체, 21GB)
 
-각 모델 별 Vocab와 말뭉치의 차이는 다음과 같습니다.
-
 
 모든 vocab는 tokeniers의 BertWordPieceTokenizer를 사용하여 만들었으며,
 
-limit_alphabet을 **1만 이상**으로 설정하여 생성하였습니다
+limit_alphabet을 **1만 이상**으로 설정하여 생성하였습니다.
+
+각 모델 별 Vocab와 말뭉치의 차이는 다음과 같습니다.
 
 * Model 1
     * Vocab size 32000, KcBERT + 음식점 리뷰 + NSMC + 위키피디아 + KCC 사용
@@ -129,9 +131,9 @@ simpletransformers와 그에 내장되어 있는 [wandb](https://app.wandb.ai) �
 ## Benchmark Result
 배치 사이즈, 학습률 등의 설정을 조정하여 NSMC 태스크에서 최고 정확도를 91.49%까지 달성하였습니다.
 
-S3에 업로드 되어 있는 모델의 성능은 91.35%, lr은 5e-5 이므로 해당 모델 사용에 오해 없으시길 바랍니다.
+S3에 업로드 되어 있는 [모델](https://huggingface.co/damien-ir/kosentelectra-discriminator-v2) 의 성능은 91.35%, lr은 5e-5 이므로 해당 모델 사용에 오해 없으시길 바랍니다.
 
-해당 성능 측정은 [Simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers)를 사용하여 측정하였습니다.
+해당 성능 측정은 [Simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers) 와 [wandb](https://app.wandb.ai) 를 사용하여 측정하였습니다.
 
 ![Benchmark Result](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/benchmark_result.png)
 
