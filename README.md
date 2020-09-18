@@ -38,7 +38,7 @@ cp nsmc/ratings_* .
 
 3. 파인튜닝 되어있는 모델을 사용하시려면, ```config.json``` 파일 속 ```model_name``` 을 다음과 같이 수정해줍니다.
 
-    파인튜닝 되어있는 모델은 NSMC 외 직접 크롤링 한 데이터를 추가로 학습시킨 모델이므로, 성능의 편차가 클 수 있습니다.
+    파인튜닝 되어있는 모델은 NSMC 외 직접 크롤링 한 데이터를 추가로 학습시킨 모델이므로, 성능의 편차가  수 있습니다.
 ```json
 {
   "model_name": "damien-ir/kosentelectra-discriminator-v2-finetuned"
