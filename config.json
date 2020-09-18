@@ -7,7 +7,7 @@
   "learning-rate": 4e-5,
   "manual_seed": 99,
   "max_seq_length": 128,
-  "model_name": "damien-ir/kosentelectra-discriminator-v2-finetuned",
+  "model_name": "damien-ir/kosentelectra-discriminator-v2",
   "model_type": "electra",
   "num_labels": 2,
   "num_train_epochs": 5,

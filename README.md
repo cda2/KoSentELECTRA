@@ -20,7 +20,7 @@ model = ElectraModel.from_pretrained("damien-ir/kosentelectra-discriminator-v2")
 
 ## How to Finetuning / Benchmark
 1. 다음의 명령어를 쉘 창에서 입력하여 이 저장소의 파일을 복사합니다.
-```
+```shell script
 git clone htts://github.com/damien-ir/KoSentELECTRA
 cd KoSentELECTRA
 ```
@@ -29,21 +29,31 @@ cd KoSentELECTRA
 
     기본 설정 상으로 파일의 이름은 NSMC의 파일 이름과 같은 ratings_train.txt, ratings_test.txt이며,
     
-    다른 파일 이름을 사용하시려면 config.json 파일을 수정해주세요.  
-```
+    다른 파일 이름을 사용하시려면 config.json 파일을 수정해주세요.
+      
+```shell script
 git clone https://github.com/e9t/nsmc
 cp nsmc/ratings_* .
 ```
 
-3. docker의 --gpus all 명령어를 사용할 수 있다면, 다음 명령어를 실행해서 바로 이진 클래스 분류를 실행할 수 있습니다.
+3. 파인튜닝 되어있는 모델을 사용하시려면, ```config.json``` 파일 속 ```model_name``` 을 다음과 같이 수정해줍니다.
+
+    파인튜닝 되어있는 모델은 NSMC 외 직접 크롤링 한 데이터를 추가로 학습시킨 모델이므로, 성능의 편차가 클 수 있습니다.
+```json
+{
+  "model_name": "damien-ir/kosentelectra-discriminator-v2-finetuned"
+}
+```
+
+4. docker의 --gpus all 명령어를 사용할 수 있다면, 다음 명령어를 실행해서 바로 이진 클래스 분류를 실행할 수 있습니다.
 
     --rm 옵션을 사용 시 컨테이너가 종료될 때 자동으로 삭제됩니다.
 
-```
+```shell script
 docker run --rm --gpus all -v $(pwd):/base-dir damienir/hkd-electra:v2-finetuned-benchmark
 ```
 
-4. 이후 모델 학습 결과가 KoSentELECTRA 폴더 속에 자동적으로 저장됩니다.
+5. 이후 모델 학습 결과가 KoSentELECTRA 폴더 속에 자동적으로 저장됩니다.
 
 * docker를 이용한 학습이 싫으시다면, 직접 ```classification.py``` 를 실행하여 fine-tuning / benchmark를 실행할 수 있습니다.
 
@@ -61,7 +71,7 @@ docker run --rm --gpus all -v $(pwd):/base-dir damienir/hkd-electra:v2-finetuned
     
 +) 다음의 명령어를 사용하여 간단한 감성 분석 서버를 만들 수 있습니다. localhost:8000으로 접속해보세요.
 
-```
+```shell script
 docker run --rm --gpus all -p 8000:8000 --name nsmc-web damienir/hkd-electra:nsmc-web
 ```
 
@@ -103,7 +113,7 @@ limit_alphabet을 **1만 이상**으로 설정하여 생성하였습니다.
 
 이를 1.5e-4 로 수정하여 학습시켰습니다.
 
-```
+```json
 {
     "use_tpu": true,
     "num_tpu_cores": 8,
