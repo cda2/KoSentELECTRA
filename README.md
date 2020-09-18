@@ -31,7 +31,8 @@ cd KoSentELECTRA
     
     다른 파일 이름을 사용하시려면 config.json 파일을 수정해주세요.  
 ```
-cp ../ratings_* .
+git clone https://github.com/e9t/nsmc
+cp nsmc/ratings_* .
 ```
 
 3. docker의 --gpus all 명령어를 사용할 수 있다면, 다음 명령어를 실행해서 바로 이진 클래스 분류를 실행할 수 있습니다.
