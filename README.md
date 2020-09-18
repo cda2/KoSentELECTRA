@@ -43,6 +43,8 @@ cp nsmc/ratings_* .
 docker run --rm --gpus all -v $(pwd):/base-dir damienir/hkd-electra:v2-finetuned-benchmark
 ```
 
+4. 이후 모델 학습 결과가 KoSentELECTRA 폴더 속에 자동적으로 저장됩니다.
+
 * docker를 이용한 학습이 싫으시다면, 직접 ```classification.py``` 를 실행하여 fine-tuning / benchmark를 실행할 수 있습니다.
 
 * Windows 10의 환경이라 GPU 문제로 인해 docker 설정이 어려운 경우,
