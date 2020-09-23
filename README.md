@@ -21,7 +21,7 @@ model = ElectraModel.from_pretrained("damien-ir/kosentelectra-discriminator-v2")
 ## How to Finetuning / Benchmark
 1. 다음의 명령어를 쉘 창에서 입력하여 이 저장소의 파일을 복사합니다.
 ```shell script
-git clone htts://github.com/damien-ir/KoSentELECTRA
+git clone https://github.com/damien-ir/KoSentELECTRA
 cd KoSentELECTRA
 ```
 
