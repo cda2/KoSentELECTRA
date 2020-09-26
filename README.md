@@ -160,3 +160,15 @@ TensorFlow Research Cloud(TFRC) 의 지원을 받아 Cloud TPU로 모델을 학�
 - [simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers)
 - [kor_pretrain_LM](https://github.com/enlipleai/kor_pretrain_LM)
 - [wandb](https://app.wandb.ai)
+
+## Citations
+[ELECTRA](https://github.com/google-research/electra)
+```bibtex
+@misc{clark2020electra,
+    title={ELECTRA: Pre-training Text Encoders as Discriminators Rather Than Generators},
+    author={Kevin Clark and Minh-Thang Luong and Quoc V. Le and Christopher D. Manning},
+    year={2020},
+    eprint={2003.10555},
+    archivePrefix={arXiv},
+    primaryClass={cs.CL}
+}
