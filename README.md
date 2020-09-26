@@ -142,9 +142,9 @@ limit_alphabet을 **1만 이상**으로 설정하여 생성하였습니다.
 simpletransformers와 그에 내장되어 있는 [wandb](https://app.wandb.ai) 를 사용하여 빠르고, 한 눈에 성능을 비교할 수 있습니다.
 
 ## Benchmark Result
-배치 사이즈, 학습률 등의 설정을 조정하여 NSMC 태스크에서 최고 정확도를 91.49%까지 달성하였습니다.
+배치 사이즈, 학습률 등의 설정을 조정하여 NSMC 태스크에서 최고 정확도를 91.53%까지 달성하였습니다.
 
-S3에 업로드 되어 있는 [모델](https://huggingface.co/damien-ir/kosentelectra-discriminator-v2) 의 성능은 91.35%, lr은 5e-5 이므로 해당 모델 사용에 오해 없으시길 바랍니다.
+해당 모델은 S3에 업로드 되어 있는 [모델](https://huggingface.co/damien-ir/kosentelectra-discriminator-v2-finetuned) 이며, lr은 5e-5 으로 학습하였습니다.
 
 해당 성능 측정은 [Simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers) 와 [wandb](https://app.wandb.ai) 를 사용하여 측정하였습니다.
 
