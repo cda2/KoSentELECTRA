@@ -1,5 +1,5 @@
 {
-  "best_model_dir": "best/",
+  "best_model_dir": "/base-dir/best/",
   "evaluate_during_training": true,
   "evaluate_during_training_steps": 2000,
   "evaluate_during_training_verbose": true,
@@ -11,7 +11,7 @@
   "model_type": "electra",
   "num_labels": 2,
   "num_train_epochs": 5,
-  "output_dir": "/base-dir/output",
+  "output_dir": "/base-dir/output/",
   "overwrite_output_dir": true,
   "save_model_every_epoch": true,
   "save_steps": 2000,
