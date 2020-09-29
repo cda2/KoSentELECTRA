@@ -11,12 +11,20 @@
 
 ## How to use
 
+* Model 2
 ```python
 from transformers import ElectraTokenizer, ElectraModel
 
+# Model 2 (Recommended)
 tokenizer = ElectraTokenizer.from_pretrained("damien-ir/kosentelectra-discriminator-v2")
 model = ElectraModel.from_pretrained("damien-ir/kosentelectra-discriminator-v2")
 ```
+
+* 다른 모델 번호를 사용하고 싶으시다면, ```v2``` 의 번호를 수정하여 사용해주세요.
+
+* 2번 모델을 제외하고는 TPU 학습 중 오류로 인해 중단된 바가 있어, Simpletransformers 외의 파인튜닝 코드에서 정상작동을 보증하지 못합니다.
+
+* 다른 모델들의 벤치마크 결과는 페이지 하단, 또는 [wandb 페이지](https://wandb.ai/damien/nsmc-compare) 를 참고하시기 바랍니다.
 
 ## How to Finetuning / Benchmark
 1. 다음의 명령어를 쉘 창에서 입력하여 이 저장소의 파일을 복사합니다.
@@ -38,7 +46,7 @@ cp nsmc/ratings_* .
 
 3. 파인튜닝 되어있는 모델을 사용하시려면, ```config.json``` 파일 속 ```model_name``` 을 다음과 같이 수정해줍니다.
 
-    파인튜닝 되어있는 모델은 NSMC 외 직접 크롤링 한 데이터를 추가로 학습시킨 모델이므로, 성능의 편차가 클 수 있습니다.
+    파인튜닝 되어있는 모델은 현재 NSMC 데이터만으로 학습시킨 모델이며, 사용하시려면 json 파일을 다음과 같이 수정해주세요.
 ```json
 {
   "model_name": "damien-ir/kosentelectra-discriminator-v2-finetuned"
@@ -96,22 +104,22 @@ limit_alphabet을 **1만 이상**으로 설정하여 생성하였습니다.
 각 모델 별 Vocab와 말뭉치의 차이는 다음과 같습니다.
 
 * Model 1
-    * Vocab size 32000, KcBERT + 음식점 리뷰 + NSMC + 위키피디아 + KCC 사용
+    * Vocab size 32000, KcBERT + 음식점 리뷰 + NSMC + 위키피디아 + KCC 사용, 2M steps 학습
 * Model 2
     * Vocab size 32000, KcBERT + 음식점 리뷰 (소량) + NSMC 사용, 1M steps 학습
 * Model 3
-    * Vocab size 64000, KcBERT + 음식점 리뷰 + NSMC + 위키피디아 + KCC + **국립국어원 모두의 말뭉치**
+    * Vocab size 64000, KcBERT + 음식점 리뷰 + NSMC + 위키피디아 + KCC + **국립국어원 모두의 말뭉치**, 1.6M steps 학습
 * Model 4  
-    * Vocab size 128000, KcBERT + 음식점 리뷰 + NSMC + 위키피디아 + KCC + **국립국어원 모두의 말뭉치**
+    * Vocab size 128000, KcBERT + 음식점 리뷰 + NSMC + 위키피디아 + KCC + **국립국어원 모두의 말뭉치**, 1.3M steps 학습
 * Model 5 (for KorQuad testing)
-    * Vocab size 32000, 인라이플의 [Large 모델](https://github.com/enlipleai/kor_pretrain_LM) vocab 사용, 말뭉치는 위와 같음
-    
-모델 2를 제외한 나머지 모델들은 아직도 TPU에서 학습 중이므로, 추후 결과를 알려 드리겠습니다.
+    * Vocab size 32000, 인라이플의 [Large 모델](https://github.com/enlipleai/kor_pretrain_LM) vocab 사용, 말뭉치는 위와 같음, 1.75M steps 학습
 
 ## About Pretrain Config
 구어체 기반의 모델을 학습시에는 다소 Base 모델의 기본 학습률인 2e-4가 높다고 판단하였고,
 
 이를 1.5e-4 로 수정하여 학습시켰습니다.
+
+모델 번호에 따라 vocab size의 차이가 있을 수 있습니다.
 
 ```json
 {
@@ -142,13 +150,15 @@ limit_alphabet을 **1만 이상**으로 설정하여 생성하였습니다.
 simpletransformers와 그에 내장되어 있는 [wandb](https://app.wandb.ai) 를 사용하여 빠르고, 한 눈에 성능을 비교할 수 있습니다.
 
 ## Benchmark Result
-배치 사이즈, 학습률 등의 설정을 조정하여 NSMC 태스크에서 최고 정확도를 91.53%까지 달성하였습니다.
+배치 사이즈, 학습률 등의 설정을 조정하여 NSMC 태스크에서 최고 정확도를 91.69%까지 달성하였습니다.
 
-해당 모델은 S3에 업로드 되어 있는 [모델](https://huggingface.co/damien-ir/kosentelectra-discriminator-v2-finetuned) 이며, lr은 5e-5 으로 학습하였습니다.
+해당 모델은 S3에 업로드 되어 있는 [모델](https://huggingface.co/damien-ir/kosentelectra-discriminator-v3-finetuned) 이며, lr은 5e-5 으로 학습하였습니다.
 
 해당 성능 측정은 [Simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers) 와 [wandb](https://app.wandb.ai) 를 사용하여 측정하였습니다.
 
-![Benchmark Result](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/benchmark_result.png)
+각 모델들의 상세한 파인튜닝 결과를 제 [wandb 페이지](https://wandb.ai/damien/nsmc-compare) 에서 확인하실 수 있습니다. 
+
+![Benchmark Result](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/benchmark_results.png)
 
 
 ## Acknowledgement
@@ -161,7 +171,7 @@ TensorFlow Research Cloud(TFRC) 의 지원을 받아 Cloud TPU로 모델을 학�
 - [kor_pretrain_LM](https://github.com/enlipleai/kor_pretrain_LM)
 - [wandb](https://app.wandb.ai)
 
-## Citations
+## Reference Citations
 [ELECTRA](https://github.com/google-research/electra)
 ```bibtex
 @misc{clark2020electra,
