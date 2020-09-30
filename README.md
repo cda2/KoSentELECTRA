@@ -22,8 +22,6 @@ model = ElectraModel.from_pretrained("damien-ir/kosentelectra-discriminator-v2")
 
 * 다른 모델 번호를 사용하고 싶으시다면, ```v2``` 의 번호를 수정하여 사용해주세요.
 
-* 2번 모델을 제외하고는 TPU 학습 중 오류로 인해 중단된 바가 있어, Simpletransformers 외의 파인튜닝 코드에서 정상작동을 보증하지 못합니다.
-
 * 다른 모델들의 벤치마크 결과는 페이지 하단, 또는 [wandb 페이지](https://wandb.ai/damien/nsmc-compare) 를 참고하시기 바랍니다.
 
 ## How to Finetuning / Benchmark
