@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-cudnn7-runtime-ubuntu18.04
+FROM nvidia/cuda:11.1-cudnn8-runtime-ubuntu18.04
 
 RUN sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list && \
 apt update && \
@@ -13,18 +13,12 @@ apt install -y bash \
 
 RUN python3 -m pip install --no-cache-dir --upgrade pip && \
     python3 -m pip install --no-cache-dir \
-    jupyter \
-    tensorflow \
-    torch \
     scikit-learn \
     simpletransformers
 
+RUN python3 -m pip install --pre torch torchvision -f https://download.pytorch.org/whl/nightly/cu110/torch_nightly.html
+
 RUN mkdir /electra
 WORKDIR /electra
-COPY . /electra/
-
-ADD ./classification.py /electra/
-RUN mkdir /base-dir
-ADD ./config.json /base-dir/
 
 CMD ["python3", "classification.py"]

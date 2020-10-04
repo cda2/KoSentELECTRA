@@ -1,6 +1,12 @@
 # KoSentELECTRA
 다양한 구어체 말뭉치들을 모아서 직접 프리트레인, 파인튜닝한 감성 분석 특화 모델입니다.
 
+현재 1개의 모델을 프리트레인을 마쳤으며, 나머지 4개의 모델을 프리트레인 하고 있습니다.
+
+각 모델마다 다른 설정과 말뭉치를 사용하였으며, 단순히 감성 분석에 특화된 모델이 아닌,
+
+다량의 말뭉치를 사용하여 구어체와 문어체 및 신조어, 오탈자까지도 처리할 수 있는 만능 모델을 만들고자 하고 있습니다.
+
 이 모델은 [2020 국어 정보 처리 시스템 경진 대회](http://hkd.or.kr/) 출품작입니다.
 
 ## How to use
@@ -14,7 +20,15 @@ tokenizer = ElectraTokenizer.from_pretrained("damien-ir/kosentelectra-discrimina
 model = ElectraModel.from_pretrained("damien-ir/kosentelectra-discriminator-v2")
 ```
 
-* 다른 모델 번호를 사용하고 싶으시다면, ```v2``` 의 번호를 수정하여 사용해주세요.
+* 다른 모델 번호를 사용하고 싶으시다면, ```v2``` 의 번호를 수정하여 사용해주세요. 아래는 예시입니다.
+
+```python
+from transformers import ElectraTokenizer, ElectraModel
+
+# Model 3 (Bigger Vocab, Best Score)
+tokenizer = ElectraTokenizer.from_pretrained("damien-ir/kosentelectra-discriminator-v3")
+model = ElectraModel.from_pretrained("damien-ir/kosentelectra-discriminator-v3")
+```
 
 * 다른 모델들의 벤치마크 결과는 페이지 하단, 또는 [wandb 페이지](https://wandb.ai/damien/nsmc-compare) 를 참고하시기 바랍니다.
 
@@ -25,18 +39,7 @@ git clone https://github.com/damien-ir/KoSentELECTRA
 cd KoSentELECTRA
 ```
 
-2. 학습용 데이터와 검증용 데이터를 clone한 KoSentELECTRA 폴더에 넣어줍니다.
-
-    기본 설정 상으로 파일의 이름은 NSMC의 파일 이름과 같은 ratings_train.txt, ratings_test.txt이며,
-    
-    다른 파일 이름을 사용하시려면 config.json 파일을 수정해주세요.
-      
-```shell script
-git clone https://github.com/e9t/nsmc
-cp nsmc/ratings_* .
-```
-
-3. 파인튜닝 되어있는 모델을 사용하시려면, ```config.json``` 파일 속 ```model_name``` 을 다음과 같이 수정해줍니다.
+2. 파인튜닝 되어있는 모델을 사용하시려면, ```config.json``` 파일 속 ```model_name``` 을 다음과 같이 수정해줍니다.
 
     파인튜닝 되어있는 모델은 현재 NSMC 데이터만으로 학습시킨 모델이며, 사용하시려면 json 파일을 다음과 같이 수정해주세요.
 ```json
@@ -45,15 +48,25 @@ cp nsmc/ratings_* .
 }
 ```
 
-4. docker의 --gpus all 명령어를 사용할 수 있다면, 다음 명령어를 실행해서 바로 이진 클래스 분류를 실행할 수 있습니다.
+또는 3번 모델의 NSMC 파인튜닝된 모델을 사용하실 수 있습니다.
 
-    --rm 옵션을 사용 시 컨테이너가 종료될 때 자동으로 삭제됩니다.
-
-```shell script
-docker run --rm --gpus all -v $(pwd):/base-dir damienir/hkd-electra:v2-finetuned-benchmark
+```json
+{
+  "model_name": "damien-ir/kosentelectra-discriminator-v3-nsmc"
+}
 ```
 
-5. 이후 모델 학습 결과가 KoSentELECTRA 폴더 속에 자동적으로 저장됩니다.
+3. docker의 --gpus all 명령어를 사용할 수 있다면, 다음 명령어를 실행해서 바로 이진 클래스 분류를 실행할 수 있습니다.
+
+    --rm 옵션을 사용 시 컨테이너가 종료될 때 자동으로 삭제됩니다.
+    
+    gpu 없이 학습 자체는 가능하나, 속도가 매우 느립니다.
+
+```shell script
+docker run --rm --gpus all -v $(pwd):/electra damienir/kosentelectra:base
+```
+
+4. 이후 모델 학습 결과가 KoSentELECTRA 폴더 속에 자동적으로 저장됩니다.
 
 * docker를 이용한 학습이 싫으시다면, 직접 ```classification.py``` 를 실행하여 fine-tuning / benchmark를 실행할 수 있습니다.
 
@@ -144,7 +157,7 @@ simpletransformers와 그에 내장되어 있는 [wandb](https://app.wandb.ai) �
 ## Benchmark Result
 배치 사이즈, 학습률 등의 설정을 조정하여 NSMC 태스크에서 최고 정확도를 91.69%까지 달성하였습니다.
 
-해당 모델은 S3에 업로드 되어 있는 [모델](https://huggingface.co/damien-ir/kosentelectra-discriminator-v3) 이며, lr은 5e-5 으로 학습하였습니다.
+해당 모델은 S3에 업로드 되어 있는 [모델](https://huggingface.co/damien-ir/kosentelectra-discriminator-v3-finetuned) 이며, lr은 5e-5 으로 학습하였습니다.
 
 해당 성능 측정은 [Simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers) 와 [wandb](https://app.wandb.ai) 를 사용하여 측정하였습니다.
 

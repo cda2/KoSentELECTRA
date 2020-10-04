@@ -1,5 +1,5 @@
 {
-  "best_model_dir": "/base-dir/best/",
+  "best_model_dir": "/electra/best/",
   "evaluate_during_training": true,
   "evaluate_during_training_steps": 2000,
   "evaluate_during_training_verbose": true,
@@ -11,17 +11,17 @@
   "model_type": "electra",
   "num_labels": 2,
   "num_train_epochs": 5,
-  "output_dir": "/base-dir/output/",
+  "output_dir": "/electra/output/",
   "overwrite_output_dir": true,
   "save_model_every_epoch": true,
   "save_steps": 2000,
   "sliding_window": true,
   "stride": 0.9,
-  "tensorboard_dir": "/base-dir/output",
+  "tensorboard_dir": "/electra/output",
   "test_batch_size": 64,
-  "test_data": "/base-dir/ratings_test.txt",
+  "test_data": "/electra/ratings_test.txt",
   "train_batch_size": 64,
-  "train_data": "/base-dir/ratings_train.txt",
+  "train_data": "/electra/ratings_train.txt",
   "use_cached_eval_features": true,
   "use_multiprocessing": true
 }

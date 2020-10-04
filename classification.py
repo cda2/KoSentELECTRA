@@ -14,7 +14,7 @@ def clean_df(data: pd.DataFrame) -> pd.DataFrame:
     return data
 
 
-def read_json(file_loc: str = "/base-dir/config.json") -> dict:
+def read_json(file_loc: str = "/electra/config.json") -> dict:
     fp = open(file_loc, mode='r', encoding='utf-8')
     json_data = json.load(fp=fp)
     fp.close()
@@ -23,11 +23,14 @@ def read_json(file_loc: str = "/base-dir/config.json") -> dict:
 
 config = read_json()
 
-train = pd.read_csv(config["train_data"], sep='\t')
-test = pd.read_csv(config["test_data"], sep='\t')
+train, test = None, None
 
-train = clean_df(train)
-test = clean_df(test)
+if config.get("train_data"):
+    train = pd.read_csv(config["train_data"], sep='\t')
+    train = clean_df(train)
+if config.get("test_data"):
+    test = pd.read_csv(config["test_data"], sep='\t')
+    test = clean_df(test)
 
 cuda_available = torch.cuda.is_available()
 
@@ -47,6 +50,10 @@ if __name__ == "__main__":
                                 use_cuda=cuda_available,
                                 args=config)
 
-    model.train_model(train_df=train, eval_df=test, acc=accuracy_score)
-
-    result, model_outputs, wrong_predictions = model.eval_model(eval_df=test, acc=accuracy_score)
+    if train is not None:
+        if test is None:
+            model.train_model(train_df=train, acc=accuracy_score)
+        else:
+            model.train_model(train_df=train, eval_df=test, acc=accuracy_score)
+    else:
+        result, model_outputs, wrong_predictions = model.eval_model(eval_df=test, acc=accuracy_score)
