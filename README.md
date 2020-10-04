@@ -1,12 +1,6 @@
 # KoSentELECTRA
 다양한 구어체 말뭉치들을 모아서 직접 프리트레인, 파인튜닝한 감성 분석 특화 모델입니다.
 
-현재 1개의 모델을 프리트레인을 마쳤으며, 나머지 4개의 모델을 프리트레인 하고 있습니다.
-
-각 모델마다 다른 설정과 말뭉치를 사용하였으며, 단순히 감성 분석에 특화된 모델이 아닌,
-
-다량의 말뭉치를 사용하여 구어체와 문어체 및 신조어, 오탈자까지도 처리할 수 있는 만능 모델을 만들고자 하고 있습니다.
-
 이 모델은 [2020 국어 정보 처리 시스템 경진 대회](http://hkd.or.kr/) 출품작입니다.
 
 ## How to use
@@ -61,9 +55,19 @@ cd KoSentELECTRA
     --rm 옵션을 사용 시 컨테이너가 종료될 때 자동으로 삭제됩니다.
     
     gpu 없이 학습 자체는 가능하나, 속도가 매우 느립니다.
+    
+    (Pytorch 1.6.0 - Cuda 10.1, Ubuntu 18.04 Cuda 10.1)
 
 ```shell script
 docker run --rm --gpus all -v $(pwd):/electra damienir/kosentelectra:base
+```
+
+* RTX 3천번대 모델을 사용 중이시라면, 다음의 명령어를 사용해주세요.
+    
+    (Pytorch Nightly - Cuda 11.0, Ubuntu 18.04 Cuda 11.1)
+    
+```shell script
+docker run --rm --gpus all -v $(pwd):/electra damienir/kosentelectra:rtx3000
 ```
 
 4. 이후 모델 학습 결과가 KoSentELECTRA 폴더 속에 자동적으로 저장됩니다.
