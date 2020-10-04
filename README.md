@@ -70,6 +70,8 @@ docker run --rm --gpus all -v $(pwd):/electra damienir/kosentelectra:base
 
 * docker를 이용한 학습이 싫으시다면, 직접 ```classification.py``` 를 실행하여 fine-tuning / benchmark를 실행할 수 있습니다.
 
+    이 경우엔 electra 폴더를 만드셔서 ```config.json``` 파일과 학습 파일들을 옮기시거나, 또는 설정 파일과 ```classification.py``` 를 수정해주세요.
+
 * Windows 10의 환경이라 GPU 문제로 인해 docker 설정이 어려운 경우,
 
     nvidia의 [cuda toolkit documentation](https://docs.nvidia.com/cuda/wsl-user-guide/index.html), simpletransformers의 [setup](https://github.com/ThilinaRajapakse/simpletransformers#setup) 을 참고하여 GPU 환경을 구축 후 실행해 주세요.
@@ -175,6 +177,7 @@ TensorFlow Research Cloud(TFRC) 의 지원을 받아 Cloud TPU로 모델을 학�
 - [simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers)
 - [kor_pretrain_LM](https://github.com/enlipleai/kor_pretrain_LM)
 - [wandb](https://app.wandb.ai)
+- [KoELECTRA](https://github.com/monologg/KoELECTRA)
 
 ## Reference Citations
 [ELECTRA](https://github.com/google-research/electra)
@@ -187,3 +190,15 @@ TensorFlow Research Cloud(TFRC) 의 지원을 받아 Cloud TPU로 모델을 학�
     archivePrefix={arXiv},
     primaryClass={cs.CL}
 }
+```
+[KoELECTRA](https://github.com/monologg/KoELECTRA)
+```bibtex
+@misc{park2020koelectra,
+  author = {Park, Jangwon},
+  title = {KoELECTRA: Pretrained ELECTRA Model for Korean},
+  year = {2020},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/monologg/KoELECTRA}}
+}
+```
