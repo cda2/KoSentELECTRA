@@ -7,7 +7,7 @@
 
 저희의 모델은 Hugging Face 사의 [transformers](https://github.com/huggingface/transformers) 라이브러리를 적극적으로 도입하였으며,
 
-직접 프리트레인 / 파인튜닝을 모델들을 [S3](https://huggingface.co/damien-ir) 에 업로드 하고 있습니다.
+직접 프리트레인 / 파인튜닝을 완료한 모델들을 [S3](https://huggingface.co/damien-ir) 에 업로드 하고 있습니다.
 
 따라서 S3의 목록을 참고하셔서 설정을 바꾸신 후, 이를 통해 바로 파인튜닝을 진행하실 수 있습니다.
 
