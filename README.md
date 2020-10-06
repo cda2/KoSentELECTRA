@@ -35,14 +35,14 @@ cd KoSentELECTRA
 
 2. 파인튜닝 되어있는 모델을 사용하시려면, ```config.json``` 파일 속 ```model_name``` 을 다음과 같이 수정해줍니다.
 
-    파인튜닝 되어있는 모델은 현재 NSMC 데이터만으로 학습시킨 모델이며, 사용하시려면 json 파일을 다음과 같이 수정해주세요.
+    파인튜닝 되어있는 모델은 현재 NSMC와 네이버 음식점 리뷰를 섞어 학습시킨 모델이며, 사용하시려면 json 파일을 다음과 같이 수정해주세요.
 ```json
 {
-  "model_name": "damien-ir/kosentelectra-discriminator-v2-finetuned"
+  "model_name": "damien-ir/kosentelectra-discriminator-v2-mixed"
 }
 ```
 
-또는 3번 모델의 NSMC 파인튜닝된 모델을 사용하실 수 있습니다.
+또는 3번 모델의 NSMC 데이터만으로 파인튜닝된 모델을 사용하실 수 있습니다.
 
 ```json
 {
@@ -64,7 +64,7 @@ docker run --rm --gpus all -v $(pwd):/electra damienir/kosentelectra:base
 
 * RTX 3천번대 모델을 사용 중이시라면, 다음의 명령어를 사용해주세요.
     
-    (Pytorch Nightly - Cuda 11.0, Ubuntu 18.04 Cuda 11.1)
+    (Pytorch Nightly - Cuda 11.0, Ubuntu 18.04 Cuda 11.0)
     
 ```shell script
 docker run --rm --gpus all -v $(pwd):/electra damienir/kosentelectra:rtx3000
