@@ -35,18 +35,20 @@ cd KoSentELECTRA
 
 2. 파인튜닝 되어있는 모델을 사용하시려면, ```config.json``` 파일 속 ```model_name``` 을 다음과 같이 수정해줍니다.
 
-    파인튜닝 되어있는 모델은 현재 NSMC와 네이버 음식점 리뷰를 섞어 학습시킨 모델이며, 사용하시려면 json 파일을 다음과 같이 수정해주세요.
+    파인튜닝 되어있는 모델은 NSMC와 네이버 음식점 리뷰를 섞어 학습시킨 모델이며, 사용하시려면 json 파일을 다음과 같이 수정해주세요.
 ```json
 {
   "model_name": "damien-ir/kosentelectra-discriminator-v2-mixed"
 }
 ```
 
-또는 3번 모델의 NSMC 데이터만으로 파인튜닝된 모델을 사용하실 수 있습니다.
+또는 2번 모델의 NSMC 데이터만으로 파인튜닝된 모델을 사용하실 수 있습니다.
+
+각 번호의 모델마다 파인튜닝된 모델이 업로드 되어 있으므로, 필요에 따라 ```v2``` 를 수정해서 사용하실 수 있습니다.
 
 ```json
 {
-  "model_name": "damien-ir/kosentelectra-discriminator-v3-nsmc"
+  "model_name": "damien-ir/kosentelectra-discriminator-v2-nsmc"
 }
 ```
 
