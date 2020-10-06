@@ -5,6 +5,12 @@
 
 ## How to use
 
+저희의 모델은 Hugging Face 사의 [transformers](https://github.com/huggingface/transformers) 라이브러리를 적극적으로 도입하였으며,
+
+직접 프리트레인 / 파인튜닝을 모델들을 [S3](https://huggingface.co/damien-ir) 에 업로드 하고 있습니다.
+
+따라서 S3의 목록을 참고하셔서 설정을 바꾸신 후, 이를 통해 바로 파인튜닝을 진행하실 수 있습니다.
+
 * Model 2
 ```python
 from transformers import ElectraTokenizer, ElectraModel
@@ -150,6 +156,12 @@ limit_alphabet을 **1만 이상**으로 설정하여 생성하였습니다.
     "num_train_steps": 1300000
 }
 ```
+
+학습에 사용된 설정 파일들은 [pretrain_config](https://github.com/Damien-IR/KoSentELECTRA/tree/master/pretrain_config) 를 참고하시기 바랍니다.
+
+또한 학습에 사용된 말뭉치들이 저작권 및 개인정보가 많이 포함되어 있는 만큼, 직접적인 공유가 어렵습니다.
+
+워낙 양이 많아 익명 처리가 불가능해서, 이 점은 굉장히 아쉽게 생각하고 있습니다. 
 
 ## About Finetuning
 [simpletransformers](https://github.com/ThilinaRajapakse/simpletransformers) 를 이용한 파인 튜닝 코드를 작성하였으며,
