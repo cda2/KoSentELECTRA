@@ -18,9 +18,9 @@
   "sliding_window": true,
   "stride": 0.9,
   "tensorboard_dir": "/electra/output",
-  "test_batch_size": 64,
+  "test_batch_size": 32,
   "test_data": "/electra/ratings_test.txt",
-  "train_batch_size": 64,
+  "train_batch_size": 32,
   "train_data": "/electra/ratings_train.txt",
   "use_cached_eval_features": true,
   "use_multiprocessing": true
