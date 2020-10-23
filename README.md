@@ -30,11 +30,7 @@ tokenizer = ElectraTokenizer.from_pretrained("damien-ir/kosentelectra-discrimina
 model = ElectraModel.from_pretrained("damien-ir/kosentelectra-discriminator-v3")
 ```
 
-또한, Base 모델만으로는 다소 일반적인 사용이 힘들다고 판단하여 Small 모델을 지금도 학습 중입니다.
-
-TFRC 측에 요청하여 한 달 가량 추가적으로 TPU를 사용할 수 있도록 인가받았고, 이를 통해 현재 학습시키고 있습니다.
-
-현재 직접 사용하실 수 있는 Small 모델은 2번 모델을 1M Steps 학습시킨 모델 뿐이며, 다른 모델들의 학습 결과는 추후 알려 드리겠습니다. 
+현재 직접 사용하실 수 있는 Small 모델은 2번 모델을 1.75M Steps 학습시킨 모델 뿐입니다.
 ```python
 from transformers import ElectraTokenizer, ElectraModel
 
@@ -98,14 +94,6 @@ docker run --rm --gpus all -v $(pwd):/electra damienir/kosentelectra:rtx3000
 
 도커가 정상적으로 실행되었다면 다음과 같이 모델이 학습되는 모습을 볼 수 있습니다.
 ![docker works well](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/docker_works_well.png)
-    
-+) 다음의 명령어를 사용하여 간단한 감성 분석 서버를 만들 수 있습니다. localhost:8000으로 접속해보세요.
-
-```shell script
-docker run --rm --gpus all -p 8000:8000 --name nsmc-web damienir/hkd-electra:nsmc-web
-```
-
-![nsmc_web_image](https://raw.githubusercontent.com/Damien-IR/KoSentELECTRA/master/images/nsmc_web.gif)
 
 ## About Model's Corpus
 개인으로서 수집할 수 있는 대용량 말뭉치는 다 사용하였으며, 각 모델마다 차이가 있습니다.
